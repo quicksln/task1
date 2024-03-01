@@ -1,0 +1,43 @@
+﻿@page "/wind"
+
+<PageTitle>Temp. & Wind</PageTitle>
+
+<RadzenCard>
+    <RadzenRow>
+        <RadzenColumn Size="2">
+            <RadzenDropDown AllowClear="true" TValue="string" Change="@ShowMaxWindSpeed" Data=@CountryNames Style="width: 100%;" Placeholder="Select Country..."  />
+        </RadzenColumn>
+        <RadzenColumn Size="8">
+            <h4>Max wind speed [km/h]</h4>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenDataGrid AllowFiltering="false" AllowColumnResize="true" AllowAlternatingRows="true" AllowSorting="true" 
+                    PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" 
+                    Data="@MaxWindSpeeds" TItem="WindValuesViewModel">
+        <Columns>
+            <RadzenDataGridColumn TItem="WindValuesViewModel" Property="MaxWindSpeed" Title="Max. Wind Speed [km/h]" Width="160px" />
+            <RadzenDataGridColumn TItem="WindValuesViewModel" Property="Country" Title="Country" Width="160px" />
+        </Columns>
+    </RadzenDataGrid>
+</RadzenCard>
+
+<RadzenCard class="my-3">
+    <RadzenRow>
+        <RadzenColumn Size="2">
+            <RadzenNumeric Placeholder="0.0" TValue="double"  Step="0.1" Change="@ShowMinTemp"  />
+        </RadzenColumn>
+        <RadzenColumn Size="8">
+            <h4>Min. Temperature [C]</h4>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenDataGrid AllowFiltering="false" AllowColumnResize="true" AllowAlternatingRows="true" AllowSorting="true"
+                    PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left"
+                    Data="@MinTemperature" TItem="WeatherValuesViewModel">
+        <Columns>
+            <RadzenDataGridColumn TItem="WeatherValuesViewModel" Property="MinTemperature" Title="Min. Temp. [C]" Width="160px" />
+            <RadzenDataGridColumn TItem="WeatherValuesViewModel" Property="MaxWindSpeed" Title="Max. Wind Speed [km/h]" Width="160px" />
+            <RadzenDataGridColumn TItem="WeatherValuesViewModel" Property="Country" Title="Country" Width="160px" />
+        </Columns>
+    </RadzenDataGrid>
+</RadzenCard>
+

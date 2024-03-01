@@ -1,0 +1,49 @@
+﻿@page "/"
+
+<PageTitle>Weather</PageTitle>
+
+<RadzenCard>
+    <RadzenRow>
+        <RadzenColumn Size="1">
+            <RadzenButton Text="Trend" Click="@((args) => ShowTrend = !ShowTrend)" />
+        </RadzenColumn>
+        <RadzenColumn Size="10">
+            <h4>Min temperature by Country</h4>
+            <small>Last updated: @(MinTemperatures.FirstOrDefault()?.LastUpdateTime?.ToString("dd MMM yyyy HH:mm:ss") ?? "N/A")</small>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenChart style="height: 360px">
+        <RadzenBarSeries Data="@MinTemperatures" CategoryProperty="Location" Title="Temperature [C]" LineType="LineType.Dashed" ValueProperty="Value">
+            <RadzenSeriesTrendLine Visible="@ShowTrend" Stroke="var(--rz-danger-dark)" LineType="LineType.Dashed" />
+            <RadzenSeriesDataLabels Visible="true" />
+        </RadzenBarSeries>
+        <RadzenValueAxis FormatString="{0:N2}">
+            <RadzenGridLines Visible="true" />
+            <RadzenAxisTitle Text="Min temperature by Country" />
+        </RadzenValueAxis>
+        <RadzenBarOptions Radius="3" Height="20" />
+    </RadzenChart>
+</RadzenCard>
+
+<RadzenCard class="my-3">
+    <RadzenRow>
+        <RadzenColumn Size="1">
+            <RadzenButton Text="Trend" Click="@((args) => ShowTrendWind = !ShowTrendWind)" />
+        </RadzenColumn>
+        <RadzenColumn Size="10">
+            <h4>Highest Wind Speeds by Country</h4>
+            <small>Last updated: @(HighestWindSpeeds.FirstOrDefault()?.LastUpdateTime?.ToString("dd MMM yyyy HH:mm:ss") ?? "N/A")</small>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenChart style="height: 360px">
+        <RadzenBarSeries Data="@HighestWindSpeeds" CategoryProperty="Location" Title="Wind Speeds [km/h]" LineType="LineType.Dashed" ValueProperty="Value">
+            <RadzenSeriesTrendLine Visible="@ShowTrendWind" Stroke="var(--rz-danger-dark)" LineType="LineType.Dashed" />
+            <RadzenSeriesDataLabels Visible="true" />
+        </RadzenBarSeries>
+        <RadzenValueAxis FormatString="{0:N2}">
+            <RadzenGridLines Visible="true" />
+            <RadzenAxisTitle Text="Highest Wind Speeds by Country" />
+        </RadzenValueAxis>
+        <RadzenBarOptions Radius="3" Height="20" />
+    </RadzenChart>
+</RadzenCard>
